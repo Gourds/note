@@ -48,6 +48,51 @@
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <!-- 字数统计-->
   <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+  <!-- 代码高亮-->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <!-- 评论gittalk-->
+  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+  <script>
+    var gitalkConfig = {
+      clientID: 'ab11e4fd712f23881b5f',
+      clientSecret: '6760b2d8701321a2331c7401f7f11005a3d82459 ',
+      repo: 'note',
+      owner: 'gourds',
+      admin: ["gourds"],
+      distractionFreeMode: false
+    };
+
+    window.$docsify = {
+      plugins: [
+        function (hook, vm) {
+          hook.doneEach(function() {
+            var label, domObj, main, divEle, gitalk;
+            label = vm.route.path.split("/").pop();
+            domObj = Docsify.dom;
+            main = domObj.getNode("#main");
+
+            Array.apply(
+              null,
+              document.querySelectorAll("div.gitalk-container")
+            ).forEach(function(ele) {
+              ele.remove();
+            });
+
+            divEle = domObj.create("div");
+            divEle.id = "gitalk-container-" + label;
+            divEle.className = "gitalk-container";
+            divEle.style = "width: " + main.clientWidth + "px; margin: 0 auto 20px;";
+            domObj.appendTo(domObj.find(".content"), divEle);
+            gitalk = new Gitalk(
+              Object.assign(gitalkConfig, { id: !label ? "home" : label })
+            );
+            gitalk.render("gitalk-container-" + label);
+          });
+        }
+      ]
+    }
+  </script>
+  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
 </body>
 </html>
