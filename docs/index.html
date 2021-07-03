@@ -12,13 +12,30 @@
   <div id="app"></div>
   <script>
     window.$docsify = {
-      name: '',
+      name: 'Gourds',
       repo: '',
+      auto2top: true,
       coverpage: false,
-      loadNavbar: true
+      loadNavbar: false,
+      loadSidebar: true,
+      sidebarDisplayLevel: 0,
+      search: {
+        paths: 'auto',
+        placeholder: '请输入要搜索的关键字',
+        noData: '没有结果',
+        depth: 4,
+      },
     }
   </script>
   <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <!-- edit on github-->
+  <!--script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script-->
+  <!--search-->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <!-- copy code-->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  <!--不展开左侧-->
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
 </body>
 </html>
