@@ -54,6 +54,7 @@
   <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
   <script src="//unpkg.com/docsify/lib/plugins/gitalk.min.js"></script>
   <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
   <script>
       const gitalk = new Gitalk({
           // 这个需要在github上申请一个OAuth application
@@ -63,7 +64,7 @@
           owner: 'Gourds',
           admin: ['Gourds'],    // 这个仓库的管理员
           distractionFreeMode: true,  // 是否添加全屏遮罩
-          id: location.pathname.replace(/\//g,'').substring(0, 50),    // 页面的唯一标识，gitalk 会根据这个标识自动创建的issue的标签,我们使用页面的相对路径作为标识
+          id: md5(location.href),    // 页面的唯一标识，gitalk 会根据这个标识自动创建的issue的标签,我们使用页面的相对路径作为标识
       })
       gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
   </script>
