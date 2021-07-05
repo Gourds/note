@@ -35,7 +35,7 @@ sudo sh -c "find /opt/supervisor/log/ -type f -mtime +30 -name "*.log*" -print0 
 #删除文件过多时的问题
 sudo find /opt/supervisor/log/ -type f -mtime +30 -name "*.log*" -print0 | xargs -0 -n10 rm -f {}
 ```
-### utf-8的bom问题 
+### utf-8的bom问题
 ```bash
 #utf8的bom头由\xEF,\xBB,\xBF组成
 xxd filename | head -n1
@@ -56,7 +56,7 @@ root hard nofile 500000
 * soft nofile 500000
 * hard nofile 500000
 ```
-### 传输限速 
+### 传输限速
 ```bash
 trickle -s -u 30720 scp xxx user@xxx:/path
 ```
@@ -141,12 +141,20 @@ swapon /home/swapfile #不重启生效
 | /home | /dev/hda4 | 剩余所有空间 |
 
 
+### 查看进程文件描述符使用
+```bash
+#查看单个进程
+ls -lR /proc/13973/fd/ |grep "^l" | wc -l
+
+#查看所有进程打开的文件描述符并排序
+lsof -n |awk '{print $2}'|sort|uniq -c |sort -nr
+```
 
 ### 网络设置
 > systemctl start NetworkManager
 > nmcli c show
 
-> 
+>
 
 
 > NAME       UUID                                  TYPE            DEVICE

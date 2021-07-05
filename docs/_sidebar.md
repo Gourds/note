@@ -1,4 +1,4 @@
-* 首页
+* 计划
     * [计划](README.md)
 
 * Linux基础
@@ -26,6 +26,7 @@
 * 容器相关
     * [Docker](/docker/docker.md)
     * [K8s](/docker/kubernetes.md)
+    * [cadvisor](/docker/cadvisor.md)
 
 * 数据库
     * [Graphite](/database/graphite.md)

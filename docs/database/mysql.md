@@ -12,6 +12,7 @@ grant select,insert,update,delete on *.* to test1@"%" Identified by "abc";
 grant select,insert,update,delete on mydb.* to test2@localhost identified by "abc";
 grant select on test.* to read_yy@"%" Identified by "123";
 grant select on jpdata.* to read_yy@"%" Identified by "123";
+grant all privileges on some_database.* to some_user@"%" Identified by "123";
 grant ALL PRIVILEGES  on yy_userinfo.* to zz_userinfo@"%" Identified by "123";
 # -c).如果你不想test2有密码，可以再打一个命令将密码消掉
 grant select,insert,update,delete on mydb.* to test2@localhost identified by "123";
@@ -22,7 +23,7 @@ update mysql.user set password=password('新密码') where User="testuser" and H
 #5. 删除用户
 Delete FROM user Where User='test' and Host='localhost';
 #6. 禁用admin用户
- 
+
 #7. 查询所有用户及权限
 SELECT DISTINCT CONCAT('User: ''',user,'''@''',host,''';') AS query FROM mysql.user;
 #8. 刷新权限
@@ -36,7 +37,7 @@ CREATE DATABASE IF NOT EXISTS jumpserver DEFAULT CHARACTER SET utf8;
 ```bash
 /etc/init.d/mysqld stop
 safe_mysqld --skip-grant-tables --user=root &
-update mysql.user set password=PASSWORD('新密码') where User='root'; 
+update mysql.user set password=PASSWORD('新密码') where User='root';
 flush privileges;
 ```
 ### 安装配置
@@ -51,10 +52,28 @@ docker run --name mysql-gmtools \
 --innodb_buffer_pool_size=1600M \
 --max-allowed-packet=33554432 \
 --sql_mode=STRICT_ALL_TABLES \
- 
 #import
 docker exec -i mysql-gmtools sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < ./your.sql
 ```
+
+#### yum方式
+
+```bash
+#Centos7.x
+rpm -Uvh https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+yum install mysql-community-server
+systemctl enable mysqld
+systemctl start mysqld
+mysql_secure_installation
+
+#Centos6.x
+yum install mysql mysql-server
+chkconfig --add mysqld
+chkconfig mysqld on
+/etc/init.d/mysqld start
+mysql_secure_installation
+```
+
 
 ---
 
@@ -75,4 +94,3 @@ docker exec -i mysql-gmtools sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' 
 > 5. 将mysqld的错误消息发送到数据目录中的host_name.err 文件。
 
 > 6. 将mysqld_safe的屏幕输出发送到数据目录中的host_name.safe文件。
-
