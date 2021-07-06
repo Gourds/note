@@ -1,4 +1,4 @@
-* 计划
+* 个人记录
     * [计划](README.md)
 
 * Linux基础
@@ -44,7 +44,7 @@
 
 * CI/CD
     * [Ansible](/ci-cd/ansible.md)
-    * [Jenkins](/ci-cd/Jenkins.md)
+    * [Jenkins](/ci-cd/jenkins.md)
 
 * 监控
     * [Collectdd](/monitor/collectd.md)
