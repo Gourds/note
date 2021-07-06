@@ -5,7 +5,7 @@ jws1.*
 IT-jws1(/merge(/.*)?)?
 IT-jws1(/register(/(merge.*|register-etcd))?)?
 ```
-### 
+###
 ### DSL相关
 #### 注意-新版本任务名称改变
 ```bash
@@ -26,9 +26,43 @@ pipelineJob(jobname){
     }
 }
 ```
+
+#### 配置任务的重试机制
+添加重试并连续失败后发送邮件
+```groovy
+publishers {
+    retryBuild {
+      rerunIfUnstable()
+      retryLimit(3)
+      progressiveDelay(60, 600)
+      }
+    extendedEmail {
+        recipientList('gourds@yeah.net')
+        defaultSubject('$DEFAULT_SUBJECT')
+        replyToList('$DEFAULT_REPLYTO')
+        defaultContent('${SCRIPT, template="groovy-html.template"}')
+        contentType('text/html')
+        triggers {
+            stillFailing {
+                recipientList('gourds@yeah.net')
+            }
+        }
+    }
+}
+```
+
+#### 邮件模板
+
+使用：Download template and put /var/lib/jenkins/email-templates
+
+Example:
+```bash
+ls /var/lib/jenkins/email-templates/groovy-html.template
+```
+
 #### Jenkins之Groovy个人示例
 ##### 判断关联变量关系后返回
-```bash
+```groovy
 #AssignDatabase return Yes or No
 import groovy.json.JsonSlurper
 if (AssignDatabase.contains('Yes')){
@@ -42,7 +76,7 @@ if (AssignDatabase.contains('Yes')){
 }
 ```
 ##### 对关联变量进行截取取值
-```bash
+```groovy
 #ACID:210:6201:ad52a590-7db1-41e5-93e8-a25ae83ad275
 import groovy.json.JsonSlurper
 String gid = ACID.split(':')[0]
