@@ -1,5 +1,5 @@
-* 个人记录
-    * [计划](README.md)
+* 书签
+  * [收藏](README.md)
 
 * Linux基础
     * [常用命令](/linux-basics/Linux常用命令.md)
@@ -79,5 +79,7 @@
 * 项目工具
     * [Phabricato](/tools-project/Phabricato.md)
 
-* 硬件常识
+* 日常记录
     * [内存](/computer-common-sense/memory_common_knowledge.md)
+    * [硬盘](/computer-common-sense/disk_common_knowledge.md)
+    * [Mac系统常用](/computer-common-sense/mac_common_use.md)

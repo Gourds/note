@@ -5,6 +5,17 @@ jws1.*
 IT-jws1(/merge(/.*)?)?
 IT-jws1(/register(/(merge.*|register-etcd))?)?
 ```
+
+**权限控制相关**
+> 可以使用以下插件
+> - `role-based strategy` 
+> -  `Folder Authorization Strategy` 
+
+```xml
+#对于目录下的任务授权类似（参考https://issues.jenkins.io/browse/JENKINS-24767）或直接使用Folder这个插件
+scratch-parent(/scratch-child(/.*)?)?
+```
+
 ###
 ### DSL相关
 #### 注意-新版本任务名称改变
@@ -86,13 +97,4 @@ def etcd_data = new URL(etcd_url).text
 def slurper = new JsonSlurper()
 def result = slurper.parseText(etcd_data)
 return etcd_url
-```
-##### 权限控制相关
-> 可以使用以下插件
-> - `role-based strategy` 
-> -  `Folder Authorization Strategy` 
-
-```xml
-#对于目录下的任务授权类似（参考https://issues.jenkins.io/browse/JENKINS-24767）或直接使用Folder这个插件
-scratch-parent(/scratch-child(/.*)?)?
 ```
