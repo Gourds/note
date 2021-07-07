@@ -79,5 +79,6 @@
 * 项目工具
     * [Phabricato](/tools-project/Phabricato.md)
 
-* 硬件常识
+* 日常记录
     * [内存](/computer-common-sense/memory_common_knowledge.md)
+    * [Mac系统常用](/computer-common-sense/mac_common_use.md)
