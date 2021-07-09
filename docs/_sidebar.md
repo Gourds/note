@@ -81,4 +81,5 @@
 
 * 日常记录
     * [内存](/computer-common-sense/memory_common_knowledge.md)
+    * [硬盘](/computer-common-sense/disk_common_knowledge.md)
     * [Mac系统常用](/computer-common-sense/mac_common_use.md)
