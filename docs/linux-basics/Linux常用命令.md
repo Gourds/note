@@ -150,6 +150,24 @@ ls -lR /proc/13973/fd/ |grep "^l" | wc -l
 lsof -n |awk '{print $2}'|sort|uniq -c |sort -nr
 ```
 
+### cp
+
+|参数|描述|
+|---|---|
+|-a, --archive| same as -dR --preserve=all|
+|--backup[=CONTROL]|如果目标文件存在则备份|
+|-R, -r, --recursive|递归|
+|-v, --verbose|显示过程|
+|-x|只拷贝本文件系统|
+|-u, --update|源文件比目标文件新或目标文件不存在时更新，可做断点续传|
+
+```bash
+#只拷贝存在于本文件系统的文件，并保留文件的元信息
+cp -avx  /dir1  /dir2
+#支持断点续传
+cp -auvx /dir1  /dir2
+```
+
 ### 网络设置
 > systemctl start NetworkManager
 > nmcli c show
