@@ -1,3 +1,6 @@
+* 书签
+  * [收藏](README.md)
+
 * Linux基础
     * [常用命令](/linux-basics/Linux常用命令.md)
     * [常用排错](/linux-basics/Linux常用排错.md)
