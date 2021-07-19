@@ -38,8 +38,10 @@ RAID0/RAID5/RAID6的多块磁盘可以并行工作，所以，在这样的硬件
 
 |接口|一般速度|描述|
 |---|---|---|
-|IDE|||
-|SATA||
+|IDE（PATA接口）|并行接口 传输速率只能达到133MB/s||
+|SATA|SATA是Serial ATA的缩写，即串行ATA，是一种电脑总线，主要用于主板和大容量存储设备，比如硬盘或光驱等设备之间的数据传输. <ul><li>Serial ATA1.5Gbps（1.0+标准）的传输率已经达到150MB/s</li><li>Serial ATA 3Gbps（2.0+标准）就达到了300MB/s</li><li>Serial ATA6Gbps（3.0标准）更是达到了600MB/s</li></ul>|目前主流的消费级sata固态硬盘的普遍读写速度在480MB/s~540MB/s这个区间|
+|mSATA|mSATA SATA协会开发的新的mini-SATA(mSATA)接口控制器的产品规范，新的控制器可以让SATA技术整合在小尺寸的装置上。虽然mSATA是sata接口，但使用mini PCIe界面进行传输信号<ul><li>一般来说，1.8寸SATA的，即MicroSATA，有SSD也有HDD的。</li><li>比1.8寸更小的miniPCIE卡大小的SATA才是mSATA，目前只有SSD</li><li>mSATA接口，其实就是SATA接口的mini版，所以传输速率和SATA接口一致，有1.5Gbps、3Gbps、6Gbps三种模式</li></ul>||
+|U.2|别称SFF-8639，是由固态硬盘形态工作组织（SSD Form Factor Work Group）推出的接口规范。U.2不但能支持SATA-Express规范，还能兼容SAS、SATA等规范其理论带宽高达32Gbps与M.2接口无异|价格较为昂贵，只能算是一个较为冷门的分支|
 |SCSI||
 |SAS||
 |光纤通道||
