@@ -5,6 +5,7 @@
     * [常用命令](/linux-basics/Linux常用命令.md)
     * [常用排错](/linux-basics/Linux常用排错.md)
     * [系统资源查看](/linux-basics/Linux系统查看.md)
+    * [系统环境变量](/linux-basics/Linux环境变量.md)
     * [DNS](/linux-basics/DNS.md)
     * [文本处理](/linux-basics/Linux常用文本处理.md)
     * [awk](/linux-basics/Linux命令之awk.md)

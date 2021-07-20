@@ -85,10 +85,7 @@ find /etc/cron.d/ -type f | grep redisstorage |xargs sed -i "s/^.*redisstorage-u
 echo "t<uv6L9$!!" | passwd --stdin custom
 #useradd  -p `openssl   passwd   -1  -salt  '盐'  密码` 用户名
 ```
-### Linux设置环境变量
-```bash
-export PATH=$PATH:/your/path/bin
-```
+
 ### SSH端口隧道
 ```bash
 ssh -L 8080:192.168.164.14:8080 root@218.77.121.90
