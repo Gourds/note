@@ -1,4 +1,18 @@
 ### 常用方法
+
+### 生成reque
+
+仅生成项目中需要的包
+```bash
+pip install pipreqs
+pipreqs .
+```
+
+会生成当前环境中所有的包包括未使用的
+```bash
+pip freeze > requirements.txt
+```
+
 #### list交集并集差集处理
 ```bash
 交集
@@ -6,7 +20,7 @@ list(set(a).intersection(set(b)))
 并集
 list(set(a).union(set(b)))
 差集
-list(set(b).difference(set(a))) # b中有而a中没有的 
+list(set(b).difference(set(a))) # b中有而a中没有的
 ```
 #### 正则转义
 ```bash
@@ -80,6 +94,3 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple git
 ```
 ### 学习文章
 > - [一篇文章搞懂Python中的面向对象编程](http://yangcongchufang.com/%E9%AB%98%E7%BA%A7python%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/python-object-class.html) 
-
-
-

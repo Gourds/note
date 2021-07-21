@@ -9,6 +9,23 @@ cat /etc/docker/daemon.json
 }
 ```
 
+### 新版本安装
+
+```
+yum install yum-utils
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum-config-manager --enable docker-ce-nightly
+yum --showduplicates list docker-ce | expand
+yum install docker-ce docker-ce-cli containerd.io
+```
+
+### 安装docker-compose
+
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod a+x /usr/local/bin/docker-compose
+echo 'export PATH=/usr/local/bin:$PATH' > /etc/profile.d/usr.sh
+```
 
 ### 常见报错
 #### docker报docker-runc not installed on system

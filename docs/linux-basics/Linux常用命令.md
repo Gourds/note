@@ -165,6 +165,7 @@ cp -avx  /dir1  /dir2
 cp -auvx /dir1  /dir2
 ```
 
+
 ### 网络设置
 > systemctl start NetworkManager
 > nmcli c show
