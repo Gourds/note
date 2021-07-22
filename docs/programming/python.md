@@ -1,5 +1,18 @@
 ### 常用方法
 
+### venv
+
+```bash
+#默认
+virtualenv --no-site-packages venv
+#指定python
+python3 -m venv /path/to/new/virtual/environment
+#启用
+source venv/bin/activate
+#退出
+deactivate
+```
+
 ### 生成reque
 
 仅生成项目中需要的包
