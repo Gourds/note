@@ -38,6 +38,18 @@ let A=1+2
 #5. 使用declare
 declare -i number2=2*3+5*13-32+25 && echo $number2
 ```
+
+#### 多条件
+
+```bash
+#and
+[ condition1 ] && [ condition2 ]
+[ condition1 -a condition2 ]
+#or
+[ condition1 ] || [ condition2 ]
+[ condition1 -o condition2 ]
+```
+
 #### 条件测试
 ```bash
 #1. 使用test
