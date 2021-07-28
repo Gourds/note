@@ -12,7 +12,7 @@ git commit -m "arvon test ssy-08 ok"
 git push origin private-cloud-new-branch
 #放弃本地修改
 git checkout .
-git clean -df 
+git clean -df
 #获取远端最新代码
 ##第一种方法
 git fetch --all
@@ -35,4 +35,7 @@ git stash pop // 恢复之前忽略的文件（非常重要的一步）
 Add ignorecase = false to [core] in .git/config;
 ```
 
-
+```bash
+git config user.name "Gourds"
+git config user.email gourds@yeah.net
+```
