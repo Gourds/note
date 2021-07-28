@@ -39,3 +39,23 @@ Add ignorecase = false to [core] in .git/config;
 git config user.name "Gourds"
 git config user.email gourds@yeah.net
 ```
+
+### 修改历史提交
+
+```bash
+# 上次
+git commit --amend --author="Gourds gourds@yeah.net" --no-edit
+git push --force
+
+# 之前
+git rebase -i 4535579
+git commit --amend --author="Gourds gourds@yeah.net" --no-edit
+git rebase --continue
+git push --force
+
+git log --stat
+git log --pretty=oneline
+git log --pretty=format:"%h - %an, %ar : %s"
+
+git reflog.
+```
