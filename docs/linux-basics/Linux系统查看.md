@@ -1,3 +1,11 @@
+## Netdata
+
+很好的系统资源web查看工具
+```bash
+sudo yum install netdata
+sudo systemctl enable --now netdata
+```
+
 ## RELEASE查看
 #### CentOS版本
 ```bash
