@@ -94,6 +94,20 @@ python3 -m venv ./py_venv
 cd py_venv
 source bin/activate
 ```
+
+```bash
+wget https://www.python.org/ftp/python/3.9.0/Python-3.9.0.tgz -O /tmp/Python-3.9.0.tgz
+cd /tmp && tar zxf Python-3.9.0.tgz
+cd Python-3.9.0
+yum groupinstall -y 'Development Tools'
+yum install -y gcc openssl-devel bzip2-devel libffi-devel
+./configure prefix=/usr/local/python3
+make && make install
+export PATH=$PATH:/usr/local/python3/bin/
+#因为在旧版本的 gcc 中使用 --enable-optimizations 可能会有问题，升级gcc后可以替换成：
+#./configure prefix=/usr/local/python3 --enable-optimizations
+```
+
 #### 导出依赖
 ```bash
 virtualenv env1 --no-site-packages
