@@ -1,5 +1,16 @@
 ### 常用方法
 
+
+### Jupyter
+
+```
+python -m venv ~/Documents/jupyterlab/
+source ~/Documents/jupyterlab/venv/bin/activate
+pip install jupyterlab
+cd workdir
+jupyter lab
+```
+
 ### venv
 
 ```bash
