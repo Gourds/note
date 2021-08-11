@@ -91,6 +91,7 @@ conn.close()
 ### 安装及配置相关
 ```bash
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simpl
+pip install boto3==1.6.14  botocore==1.9.14  -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com
 ```
 #### 源码安装
 ```bash
