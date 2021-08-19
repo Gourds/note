@@ -60,6 +60,12 @@ root hard nofile 500000
 ```bash
 trickle -s -u 30720 scp xxx user@xxx:/path
 ```
+
+### ls
+```
+ls -d /dir/*/
+```
+
 ### 批量修改后缀
 ```bash
 #1
