@@ -1,4 +1,15 @@
 ### 常用语法
+
+#### try...expect
+```bash
+{
+	cmd1 &&
+	cmd2
+} || {
+	cmd3
+}
+```
+
 #### shell数组
 ```bash
 #A="a b c def" 這樣的變量只是將 $A 替換為一個單一的字串，但是改為 A=(a b c def) ，則是將 $A 定義為組數
