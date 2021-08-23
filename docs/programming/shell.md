@@ -1,6 +1,6 @@
 ### 常用语法
 
-#### try...expect
+#### try...except
 ```bash
 {
 	cmd1 &&
