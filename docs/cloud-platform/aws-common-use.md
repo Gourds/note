@@ -19,4 +19,8 @@ growpart /dev/xvda 1
 xfs_growfs -d /
 ```
 
-
+```bash
+#dyanmodb
+aws dynamodb describe-table --table-name WeeklyCard --region ap-northeast-2
+#https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html
+```
