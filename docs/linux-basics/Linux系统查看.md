@@ -86,6 +86,13 @@ pmap PID
 #pmap 3345 |tail -1
 ```
 ## DISK查看
+
+#### 查看磁盘信息
+```bash
+lsblk -o "NAME,MAJ:MIN,RM,SIZE,RO,FSTYPE,MOUNTPOINT,UUID"
+hdparm -I /dev/sda
+```
+
 #### 查看磁盘使用-du命令
 ```bash
 #du -sh /path/*
