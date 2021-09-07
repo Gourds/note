@@ -48,6 +48,7 @@
 
 * 监控
     * [Collectdd](/monitor/collectd.md)
+    * [Prometheus](/monitor/prometheus.md)
     * [Grafana](/monitor/grafana.md)
     * [Zabbix](/monitor/zabbix.md)
 
