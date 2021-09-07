@@ -9,4 +9,5 @@ label_values(node_uname_info{origin_prometheus=~"$origin_prometheus",job=~"$job"
 #支持历史数据，新写法
 query_result(count by (instance) (count_over_time(node_uname_info{origin_prometheus=~"$origin_prometheus",job=~"$job",nodename=~"$hostname"}[$__range])))
 #Regex： .*instance="(.*)"\}.*
+#Reference: https://stackoverflow.com/questions/52778031/how-to-provide-label-values-in-grafana-variables-with-time-range-for-prometheus
 ```
