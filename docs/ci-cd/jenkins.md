@@ -98,3 +98,10 @@ def slurper = new JsonSlurper()
 def result = slurper.parseText(etcd_data)
 return etcd_url
 ```
+
+##### JobDSL之classpath
+
+默认classpath不启用，安装新Jenkins需要设置Security`在Configure Global Security页面`
+参考：
+- https://issues.jenkins.io/browse/JENKINS-40961?jql=project%20%3D%20JENKINS%20AND%20component%20%3D%20job-dsl-plugin
+- https://github.com/jenkinsci/job-dsl-plugin/wiki/Migration#migrating-to-160
