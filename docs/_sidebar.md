@@ -71,11 +71,12 @@
     * [HTTP](/protocol/HTTP.md)
     * [SNMP](/protocol/SNMP.md)
 
-* 快捷键
+* 效率工具
     * [Markdown语法](/tools-productivity/Markdown语法.md)
     * [Wiki语法](/tools-productivity/Wiki语法.md)
     * [Sublime快捷键](/tools-productivity/Sublime快捷键.md)
     * [Vim快捷键](/tools-productivity/Vim快捷键.md)
+    * [录屏](/tools-productivity/record.md)
 
 * 项目工具
     * [Phabricato](/tools-project/Phabricato.md)
