@@ -1,4 +1,11 @@
 ### crontab服务
+
+command含有特殊字符需转义,如
+```
+45 * * * * sh -c "tar czvf /data/grafana_bak/grafana_`date +\%F`.tar.gz /var/lib/grafana/"
+#Reference: https://unix.stackexchange.com/questions/29578/how-can-i-execute-date-inside-of-a-cron-tab-job
+```
+
 #### 基础说明
 > crontab文件的格式：f1 f2 f3 f4 f5 program
 > 其中f1-f5分别对应：分钟M、小时H、日D、月m、周d
@@ -9,13 +16,13 @@
 > - 第4列表示月份1～12
 > - 第5列标识号星期0～6（0表示星期天）
 > - 第6列要运行的命令或脚本
-> 
+>
 **说明:** 
 > - 当f1为*时表示每分钟都要执行program，f2为*时表示每小时都要执行程序，其馀类推
 > - 当f1为a-b时表示从第a分钟到第b分钟这段时间内要执行, f2为a-b时表示从第a到第b小时都要执行，其馀类推
 > - 当f1为*/n时表示每n分钟个时间间隔执行一次
 > - 当f1为a, b, c,... 时表示第a, b, c,... 分钟要执行
-> 
+>
 **Tips：** 
 > - cmd要运行的程序，程序被送入sh执行，这个shell只有USER,HOME,SHELL这三个环境变量
 > - 当程序在你所指定的时间执行后，系统会寄一封信给你，显示该程序执行的内容，若是你不希望收到这样的信，请在每一行空一格之后加上 `> /dev/null 2>&1` 即可
@@ -70,5 +77,3 @@ crontab -l
 crontab file [-u user]
 #用指定的文件替代目前的crontab。
 ```
-
-
