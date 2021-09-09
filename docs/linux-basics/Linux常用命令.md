@@ -113,6 +113,9 @@ rm "*"
 ### 用户附加群组
 ```bash
 usermod -a -G group user
+
+#加sudo
+echo ec2-user ALL=(ALL) NOPASSWD: ALL  >> /etc/sudoers
 ```
 ### sshpass带密码登录
 ```bash
