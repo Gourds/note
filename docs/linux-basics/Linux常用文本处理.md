@@ -20,6 +20,11 @@
 
 ### sed命令
 
+#### 分组
+```bash
+echo 1.1.1.1 foo=bar blue=rea |sed "s/\(.*blue=\)\(.*\)/\1'some_str'/"
+```
+
 #### 将换行换为其他字符
 ```bash
 seq `echo 1-10|sed 's/-/ /'` |sed ":a;N;s/\n/,/g;ta"
