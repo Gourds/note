@@ -166,3 +166,16 @@ timedatectl
 grep ZONE /etc/sysconfig/clock #适用RHEL/CentOS/Fedora
 cat /etc/timezone
 ```
+
+#### 查看网络
+
+```bash
+yum install -y nload
+nload eth0
+
+yum install iftop
+iftop -nN -i eth0
+
+yum install -y nethogs
+nethogs -d 2 eth0
+```
