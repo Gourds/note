@@ -36,7 +36,11 @@ sudo sh -c "find /opt/supervisor/log/ -type f -mtime +30 -name "*.log*" -print0 
 sudo find /opt/supervisor/log/ -type f -mtime +30 -name "*.log*" -print0 | xargs -0 -n10 rm -f {}
 ```
 ### utf-8的bom问题
+问题`Bourne-Again shell script text executable, UTF-8 Unicode text, with CRLF line terminators`
+
 ```bash
+file UploadCDN.sh
+save_text: ASCII text, with very long lines
 #utf8的bom头由\xEF,\xBB,\xBF组成
 xxd filename | head -n1
 #00000000: efbb bfe6 b58b e8af 95e6 9687 e4bb b60a
