@@ -41,6 +41,17 @@ SET GOARCH=amd64
 go build main.go
 ```
 
+##### go mod
+新版本1.11开始支持。需启用`GO111MODULE=on`,默认为auto，auto会兼容之前的vender及go path的模式，直接删除GOPATH就行了，使用`GO11MODULE`项目最好在GOPATH路径之外
+
+```bash
+#确认 GO111MODULE=on  or auto
+#pwd github.com/gourds/upload2remote
+cd github.com/gourds/upload2remote
+go mod init github.com/gourds/upload2remote
+go mod tidy
+```
+
 ##### 安装
 
 
