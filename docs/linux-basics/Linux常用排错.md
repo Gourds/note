@@ -1,4 +1,82 @@
 ### 网络排错常用命令
+
+#### vmstat
+```
+vmstat -t 3
+```
+
+```
+procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu------          ---timestamp---
+ r  b     swpd   free   buff    cache       si   so    bi   bo   in   cs us sy id wa st
+ 0  0      0    3041180 1210148 19739664    0    0     0    84    0    0  8  5 87  0  0    2021-09-23 10:26:25 UTC
+ 2  0      0    3045704 1210148 19739664    0    0     0    11 14911 3806  5  6 89  0  0   2021-09-23 10:26:28 UTC
+
+#
+Procs
+    r: The number of processes waiting for run time.
+    b: The number of processes in uninterruptible sleep.
+Memory
+    swpd: the amount of virtual memory used.
+    free: the amount of idle memory.
+    buff: the amount of memory used as buffers.
+    cache: the amount of memory used as cache.
+    inact: the amount of inactive memory. (-a option)
+    active: the amount of active memory. (-a option)
+Swap
+    si: Amount of memory swapped in from disk (/s).
+    so: Amount of memory swapped to disk (/s).
+IO
+    bi: Blocks received from a block device (blocks/s).
+    bo: Blocks sent to a block device (blocks/s).
+System
+    in: The number of interrupts per second, including the clock.
+    cs: The number of context switches per second.
+CPU
+    These are percentages of total CPU time.
+    us: Time spent running non-kernel code. (user time, including nice time)
+    sy: Time spent running kernel code. (system time)
+    id: Time spent idle. Prior to Linux 2.5.41, this includes IO-wait time.
+    wa: Time spent waiting for IO. Prior to Linux 2.5.41, included in idle.
+    st: Time stolen from a virtual machine. Prior to Linux 2.6.11, unknown.
+```
+
+#### iostat
+- 查看的是块设备（block Device）级别的信息。在OS内核内部，一般不会记录文件缓存等OS文件系统级别的操作，所以OS上的应用程序看到的性能信息与iostat级别的性能信息之间有差异
+- 可以知道磁盘的繁忙程度。
+
+```bash
+#可以知道响应时间和各种队列长度
+iostat -x
+
+iostat -x -t 3
+```
+
+```
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.17    0.00    0.15    0.00    0.00   99.67
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+vda               0.00     0.90    0.01    0.89     0.24    11.89    26.81     0.00    1.44    0.51    1.45   0.09   0.01
+
+#report
+Device
+    rrqm/s: The number of read requests merged per second that were queued to the device.
+    wrqm/s: The number of write requests merged per second that were queued to the device
+    r/s: The number (after merges) of read requests completed per second for the device
+    w/s: The number (after merges) of write requests completed per second for the device
+    avgrq-sz: The average size (in sectors) of the requests that were issued to the device.
+    avgqu-sz: The average queue length of the requests that were issued to the device.
+    await: The average time (in milliseconds) for I/O requests issued to the device to be served. This includes the time spent by the requests in queue and  the  time  spent servicing them.
+    r_await: The  average  time (in milliseconds) for read requests issued to the device to be served. This includes the time spent by the requests in queue and the time spent servicing them.
+    w_await: The average time (in milliseconds) for write requests issued to the device to be served. This includes the time spent by the requests in queue and the time  spent servicing them.
+    svctm: The average service time (in milliseconds) for I/O requests that were issued to the device. Warning! Do not trust this field any more.  This field will be removed in a future sysstat version.
+    %util: Percentage of elapsed time during which I/O requests were issued to the device (bandwidth utilization for the device). Device saturation occurs when this value is close to 100%.
+```
+
+- active指的是从OS角度看已经向磁盘发送完毕，wait指的是尚未发送.当存储接近临界值时，首先active队列会增加，响应时间也会变慢，接着wait的队列长度也会增加，响应也会变慢
+- svctm称为服务时间，其实可以当成响应时间。已弃用
+- 一般未命中缓存的情况下1次IO响应差不多是几毫秒。如果响应话费10几毫秒，可以怀疑响是否有问题了
+
 #### ping
 ##### 基本用法
 ```bash
@@ -40,23 +118,23 @@ display arp |include MAC/IP
 ```bash
 #telnet 192.168.1.1 80
 #选项
--8：允许使用8位字符资料，包括输入与输出； 
+-8：允许使用8位字符资料，包括输入与输出；
 -a：尝试自动登入远端系统；
--b<主机别名>：使用别名指定远端主机名称； 
+-b<主机别名>：使用别名指定远端主机名称；
 -c：不读取用户专属目录里的.telnetrc文件；
--d：启动排错模式； 
--e<脱离字符>：设置脱离字符； 
--E：滤除脱离字符； 
--f：此参数的效果和指定"-F"参数相同； 
--F：使用Kerberos V5认证时，加上此参数可把本地主机的认证数据上传到远端主机； 
--k<域名>：使用Kerberos认证时，加上此参数让远端主机采用指定的领域名，而非该主机的域名； 
--K：不自动登入远端主机； 
--l<用户名称>：指定要登入远端主机的用户名称； 
--L：允许输出8位字符资料； 
--n<记录文件>：指定文件记录相关信息； 
--r：使用类似rlogin指令的用户界面； 
--S<服务类型>：设置telnet连线所需的ip TOS信息； 
--x：假设主机有支持数据加密的功能，就使用它； 
+-d：启动排错模式；
+-e<脱离字符>：设置脱离字符；
+-E：滤除脱离字符；
+-f：此参数的效果和指定"-F"参数相同；
+-F：使用Kerberos V5认证时，加上此参数可把本地主机的认证数据上传到远端主机；
+-k<域名>：使用Kerberos认证时，加上此参数让远端主机采用指定的领域名，而非该主机的域名；
+-K：不自动登入远端主机；
+-l<用户名称>：指定要登入远端主机的用户名称；
+-L：允许输出8位字符资料；
+-n<记录文件>：指定文件记录相关信息；
+-r：使用类似rlogin指令的用户界面；
+-S<服务类型>：设置telnet连线所需的ip TOS信息；
+-x：假设主机有支持数据加密的功能，就使用它；
 -X<认证形态>：关闭指定的认证形态。
 ```
 
@@ -120,21 +198,21 @@ traceroute IP/hostname
 ```
 ##### 命令选项
 ```bash
--d：使用Socket层级的排错功能； 
--f<存活数值>：设置第一个检测数据包的存活数值TTL的大小； 
--F：设置勿离断位； 
--g<网关>：设置来源路由网关，最多可设置8个； 
--i<网络界面>：使用指定的网络界面送出数据包； 
--I：使用ICMP回应取代UDP资料信息； 
--m<存活数值>：设置检测数据包的最大存活数值TTL的大小； 
--n：直接使用IP地址而非主机名称； 
--p<通信端口>：设置UDP传输协议的通信端口； 
--r：忽略普通的Routing Table，直接将数据包送到远端主机上。 
--s<来源地址>：设置本地主机送出数据包的IP地址； 
--t<服务类型>：设置检测数据包的TOS数值； 
--v：详细显示指令的执行过程； 
--w<超时秒数>：设置等待远端主机回报的时间； 
--x：开启或关闭数据包的正确性检验。 参数 
+-d：使用Socket层级的排错功能；
+-f<存活数值>：设置第一个检测数据包的存活数值TTL的大小；
+-F：设置勿离断位；
+-g<网关>：设置来源路由网关，最多可设置8个；
+-i<网络界面>：使用指定的网络界面送出数据包；
+-I：使用ICMP回应取代UDP资料信息；
+-m<存活数值>：设置检测数据包的最大存活数值TTL的大小；
+-n：直接使用IP地址而非主机名称；
+-p<通信端口>：设置UDP传输协议的通信端口；
+-r：忽略普通的Routing Table，直接将数据包送到远端主机上。
+-s<来源地址>：设置本地主机送出数据包的IP地址；
+-t<服务类型>：设置检测数据包的TOS数值；
+-v：详细显示指令的执行过程；
+-w<超时秒数>：设置等待远端主机回报的时间；
+-x：开启或关闭数据包的正确性检验。 参数
 ```
 
 ---
@@ -159,7 +237,7 @@ mtr -6  #IPv6
 | Host | Loss | Snt | Last | Avg | Best | Wrst | StDev |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 172.17.0.1 | 0.0% | 608 | 0.7 | 0.6 | 0.6 | 3.8 | 0.2 |
-| 地址 | 丢包率 | 每秒发送数据包量 | 最近的ping值 | 平均ping | 最好ping | 最差ping | 
+| 地址 | 丢包率 | 每秒发送数据包量 | 最近的ping值 | 平均ping | 最好ping | 最差ping |
 标准偏差 |
 
 ##### 命令安装
@@ -235,7 +313,7 @@ tcpdump -i eth0 src host baidu.com
 #抓取指定网卡发送到baidu.com的所有数据
 tcpdump -i eth0 dst host baidu.com
 #抓取指定主机（即源或目标都匹配,可以是域名也可以是IP,还可以抓取两个地址之间的通信）
-tcpdump host baidu.com 
+tcpdump host baidu.com
 tcpdump host 114.114.114.114
 tcpdump host host1 and host2
 tcpdump host 114.114.114.114 and 8.8.8.8
@@ -410,7 +488,7 @@ c 切换显示命令名称和完整命令行
 M 根据驻留内存大小进行排序
 P 根据CPU使用百分比大小进行排序
 T 根据时间/累计时间进行排序
-W 将当前设置写入~/.toprc文件中 
+W 将当前设置写入~/.toprc文件中
 ```
 
 ---
@@ -723,10 +801,3 @@ perf record ls -g    #记录执行ls时的性能数据
 ```
 
 ---
-
-
-
-
-
-
-
