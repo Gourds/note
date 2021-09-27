@@ -303,6 +303,9 @@ tcpdump -i eth1 '((tcp) and ((dst net 192.168) and (not dst host 192.168.1.200))
 ```
 ##### 常用示例
 ```bash
+#抓取获取唯一ip
+tcpdump -nn -q ip -l | awk '{ ip = gensub(/([0-9]+.[0-9]+.[0-9]+.[0-9]+)(.*)/,"\\1","g",$3); if(!d[ip]) { print ip; d[ip]=1; fflush(stdout) } }'
+
 #抓100个(-c)完整的(-s 0)数据包,不显示时间戳(-t)
 tcpdump tcp -i eth1 -t -s 0 -c 100 and dst port 22 and src net 192.168.1.0/24 -w ./save.cap
 #
