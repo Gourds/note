@@ -6,7 +6,7 @@ ipinfo.io
 cip.cc
 ifconfig.me
 myip.ipip.net
-#
+#查询指定地址 curl cip.cc/10.0.1.1  
 curl cip.cc
 curl ifconfig.me
 curl ifconfig.me/all

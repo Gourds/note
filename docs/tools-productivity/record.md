@@ -14,3 +14,6 @@ asciinema play </path/to/file>
 
 gourds@yeah.net
 ```
+
+
+- typora  markdown编辑器
