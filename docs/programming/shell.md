@@ -62,6 +62,24 @@ declare -i number2=2*3+5*13-32+25 && echo $number2
 ```
 
 #### 条件测试
+
+命令执行结果判断
+```
+if some_command;then
+  some_action
+fi
+
+
+or
+
+some_command
+rst=$?
+
+if [ $? -eq 0];then
+  some_action
+fi
+```
+
 ```bash
 #1. 使用test
 if test 1 -eq 1;then

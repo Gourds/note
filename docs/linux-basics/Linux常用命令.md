@@ -1,4 +1,5 @@
 ### 查IP
+
 ```bash
 curl ip.cn
 ip.cn
@@ -13,13 +14,21 @@ curl ifconfig.me/all
 curl www.pubyun.com/dyndns/getip
 curl members.3322.org/dyndns/getip
 ```
+
+
+
 ### 挂载Nas
+
 ```bash
 #yum install nfs-utils
 yum install cifs-utils
 mount -t cifs -o username=gourds,password=xxxx,vers=1.0  //pan.share.net/Public/ /mnt/pan
 ```
+
+
+
 ### 时间同步及设置
+
 ```bash
 #www.pool.ntp.org
 ntpdate -u cn.pool.ntp.org
@@ -28,14 +37,22 @@ ntpdate -u cn.pool.ntp.org
 #时间设置
 date -s "20100405 14:31:00"
 ```
+
+
+
 ### sudo执行shell
+
 ```bash
 sudo sh -c "echo -e 'LoadPlugin memory\n<Plugin memory>\n\tValuesPercentage true\n</Plugin>' > /etc/collectd.d/memory.conf"
 sudo sh -c "find /opt/supervisor/log/ -type f -mtime +30 -name "*.log*" -print0 |xargs -0 rm -f {}"
 #删除文件过多时的问题
 sudo find /opt/supervisor/log/ -type f -mtime +30 -name "*.log*" -print0 | xargs -0 -n10 rm -f {}
 ```
+
+
+
 ### utf-8的bom问题
+
 问题`Bourne-Again shell script text executable, UTF-8 Unicode text, with CRLF line terminators`
 
 ```bash
@@ -48,7 +65,11 @@ sed -i 's/^\xEF\xBB\xBF//g' filename
 #批量去除文件夹中utf8文件中的bom头
 grep -r -i -l $'^\xEF\xBB\xBF' . | xargs sed -i 's/^\xEF\xBB\xBF//g'
 ```
+
+
+
 ### 修改系统ulimit参数
+
 ```bash
 #在线修改
 prlimit --pid 28176 |grep NOFILE
@@ -60,52 +81,89 @@ root hard nofile 500000
 * soft nofile 500000
 * hard nofile 500000
 ```
+
+
+
 ### 传输限速
+
 ```bash
 trickle -s -u 30720 scp xxx user@xxx:/path
 ```
 
+
+
 ### ls
+
 ```
 ls -d /dir/*/
 ```
 
+
+
 ### 批量修改后缀
+
 ```bash
 #1
 rename ".txt" "" *
 #2
 find . -name "*.txt" | awk '{new=gensub(".txt","",1);system("mv "$0" "new)}'
 ```
+
+
+
 ### 查找含文本文件并替换
+
 ```bash
 find ./config/ -type f |xargs grep "ssy.bj.lcc100.com" |awk -F: '{print $1}' |xargs sed -i 's@ssy.bj.lcc100.com@ssy.shec.edu.cn@g'
 ```
+
+
+
 ### 查找文件匹配字符串注释
+
 ```bash
 find /etc/cron.d/ -type f | grep redisstorage |xargs sed -i "s/^.*redisstorage-userinfo.*/#&/g"
 ```
+
+
+
 ### 清理Cache
+
 ```
 [root@host ~]# sync
 [root@host-app2 ~]# echo 3 > /proc/sys/vm/drop_caches
 ```
+
+
+
 ### Passwd设置
+
 ```bash
 echo "t<uv6L9$!!" | passwd --stdin custom
 #useradd  -p `openssl   passwd   -1  -salt  '盐'  密码` 用户名
 ```
 
+
+
 ### SSH端口隧道
+
 ```bash
 ssh -L 8080:192.168.164.14:8080 root@218.77.121.90
 ```
+
+
+
 ### SSH远程执行命令
+
 ```bash
 ssh -p 22 user@host "command"  #双引号command里的变量等特殊命令字符会在本地解析，此时命令中不需要再本地解析引用的变量或特殊字符就需要在期前面加上转义符“\”
 ssh -i authkey -p 22 user@host 'command' #单引号，不解析
 ```
+
+
+
 ### rm删除特殊命令
+
 ```bash
 #删除带-的命令
 rm -rf ./-yourstr
@@ -114,44 +172,70 @@ rm -- -yourstr
 rm >
 rm "*"
 ```
+
+
+
 ### 用户附加群组
+
 ```bash
 usermod -a -G group user
 
 #加sudo
 echo ec2-user ALL=(ALL) NOPASSWD: ALL  >> /etc/sudoers
 ```
+
+
+
 ### sshpass带密码登录
+
 ```bash
 /usr/local/bin/sshpass -p 'your_pass' ssh  -o StrictHostKeychecking=no  root@1.1.1.1 -p22
 ```
+
+
+
 ### 加密压缩解压缩
+
 ```bash
 tar -czvf - file | openssl des3 -salt -k passw0rd -out /path/to/file.tar.gz
 #解密解压
 openssl des3 -d -k passw0rd -salt -in /path/to/file.tar.gz | tar xvf -
 ```
+
+
+
 ### 常用JMS用户权限模板
+
 ```
 ALL,!/bin/bash,!/bin/tcsh,!/bin/su,!/usr/bin/passwd,!/usr/bin/passwd root,!/bin/vim /etc/sudoers,!/usr/bin/vim /etc/sudoers,!/usr/sbin/visudo,!/usr/bin/sudo -i,!/bin/bi /etc/ssh/*,!/bin/chmod 777 /etc/*,!/bin/chmod 777 *,!/bin/chmod 777,!/bin/chmod -R 777 *,!/bin/rm /*,!/bin/rm /,!/bin/rm -rf /,!/bin/rm -rf /*,!/bin/rm /etc,!/bin/rm -r /etc,!/bin/rm -rf /etc,!/bin/rm /etc/*,!/bin/rm -r /etc/*,!/bin/rm -rf /etc/*,!/bin/rm /root,!/bin/rm -r /root,!/bin/rm -rf /root,!/bin/rm /root/*,!/bin/rm -r /root/*,!/bin/rm -rf /root/*,!/bin/rm /bin,!/bin/rm -r /bin,!/bin/rm -rf /bin,!/bin/rm /bin/*,!/bin/rm -r /bin/*,!/bin/rm -rf /bin/*
 ```
+
+
+
 ### 临时加swap
+
 ```bash
 dd if=/dev/zero of=/home/swapfile bs=1M count=1024
 mkswap /home/swapfile
 swapon /home/swapfile #不重启生效
 /home/swapfile_10G      swap                    swap    defaults        0 0#开机挂载vi /etc/fstab
 ```
+
+
+
 ### 初始化磁盘划分
-| 挂载点 | 硬盘分区 | 推荐大小 |
-| --- | --- | --- |
-| / | /dev/hda1 | 15G |
-| /boot | /dev/hda2 | 300M |
-| swap | /dev/hda3 | 2G |
-| /home | /dev/hda4 | 剩余所有空间 |
+
+| 挂载点 | 硬盘分区  | 推荐大小     |
+| ------ | --------- | ------------ |
+| /      | /dev/hda1 | 15G          |
+| /boot  | /dev/hda2 | 300M         |
+| swap   | /dev/hda3 | 2G           |
+| /home  | /dev/hda4 | 剩余所有空间 |
+
 
 
 ### 查看进程文件描述符使用
+
 ```bash
 #查看单个进程
 ls -lR /proc/13973/fd/ |grep "^l" | wc -l
@@ -160,16 +244,18 @@ ls -lR /proc/13973/fd/ |grep "^l" | wc -l
 lsof -n |awk '{print $2}'|sort|uniq -c |sort -nr
 ```
 
+
+
 ### cp
 
-|参数|描述|
-|---|---|
-|-a, --archive| same as -dR --preserve=all|
-|--backup[=CONTROL]|如果目标文件存在则备份|
-|-R, -r, --recursive|递归|
-|-v, --verbose|显示过程|
-|-x|只拷贝本文件系统|
-|-u, --update|源文件比目标文件新或目标文件不存在时更新，可做断点续传|
+| 参数                | 描述                                                   |
+| ------------------- | ------------------------------------------------------ |
+| -a, --archive       | same as -dR --preserve=all                             |
+| --backup[=CONTROL]  | 如果目标文件存在则备份                                 |
+| -R, -r, --recursive | 递归                                                   |
+| -v, --verbose       | 显示过程                                               |
+| -x                  | 只拷贝本文件系统                                       |
+| -u, --update        | 源文件比目标文件新或目标文件不存在时更新，可做断点续传 |
 
 ```bash
 #只拷贝存在于本文件系统的文件，并保留文件的元信息
@@ -179,20 +265,22 @@ cp -auvx /dir1  /dir2
 ```
 
 
+
 ### 网络设置
+
 > systemctl start NetworkManager
 > nmcli c show
 
 >
 
 
-> NAME       UUID                                  TYPE            DEVICE
+> NAME       UUID                                  TYPE            DEVICE
 
-> enp0s31f6  ab24d2da-0abe-48d6-8b3e-a26d7c46e55c  802-3-ethernet  enp0s31f6
+> enp0s31f6  ab24d2da-0abe-48d6-8b3e-a26d7c46e55c  802-3-ethernet  enp0s31f6
 
-> docker0    1b8b44e5-e65c-4358-b82b-e6ff94042643  bridge          docker0
+> docker0    1b8b44e5-e65c-4358-b82b-e6ff94042643  bridge          docker0
 
-> virbr0     48fc8c6f-acc4-4222-9a1b-2587e8d55c04  bridge          virbr0
+> virbr0     48fc8c6f-acc4-4222-9a1b-2587e8d55c04  bridge          virbr0
 
 ```shell
 #vi /etc/sysconfig/network-scripts/ifcfg-eth0
