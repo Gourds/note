@@ -134,6 +134,15 @@ hdparm -I /dev/sda
 --help 显示帮助信息
 --version 显示版本信息
 ```
+
+```
+#ext4 默认会为root用户保留一些磁盘空间，现象就是df -hl看到的输出对不上，xfs会为文件系统预留空间
+#https://www.robustperception.io/filesystem-metrics-from-the-node-exporter
+tune2fs -l /dev/vda1
+
+#Reserved block count:     2149511
+```
+
 #### fdisk命令
 ```bash
 fdisk -l#查看硬盘信息

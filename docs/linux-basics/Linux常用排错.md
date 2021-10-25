@@ -168,6 +168,15 @@ nmap -sA 172.168.1.1
 nc -vz -w2 192.168.1.1 22
 #检测UDP端口
 nc -uz -w2 192.168.1.1 53
+
+1.临时监听TCP端口
+nc -l port
+2.永久监听TCP端口
+nc -lk port
+3.临时监听UDP
+nc -lu port
+4.永久监听UDP
+nc -luk port
 ```
 ##### 参数说明
 ```bash
