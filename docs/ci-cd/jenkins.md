@@ -21,6 +21,7 @@ scratch-parent(/scratch-child(/.*)?)?
 docker network create jenkins-network
 chown 1001 /var/lib/jenkins
 docker run -d -p 58080:8080 --name jenkins \
+    --env JENKINS_USERNAME=my_username \
     --env JENKINS_PASSWORD=my_password \
     --network jenkins-network \
     --volume /var/lib/jenkins:/bitnami/jenkins \
