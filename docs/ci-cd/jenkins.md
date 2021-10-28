@@ -19,11 +19,12 @@ scratch-parent(/scratch-child(/.*)?)?
 ### 安装
 ```bash
 docker network create jenkins-network
-docker volume create --name jenkins_data
-ocker run -d -p 80:8080 --name jenkins \
-  --network jenkins-network \
-  --volume jenkins_data:/bitnami/jenkins \
-  bitnami/jenkins:2.303.2
+chown 1001 /var/lib/jenkins
+docker run -d -p 58080:8080 --name jenkins \
+    --env JENKINS_PASSWORD=my_password \
+    --network jenkins-network \
+    --volume /var/lib/jenkins:/bitnami/jenkins \
+    bitnami/jenkins:2.303.2
 ```
 
 
