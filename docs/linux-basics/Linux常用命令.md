@@ -16,7 +16,6 @@ curl members.3322.org/dyndns/getip
 ```
 
 
-
 ### 挂载Nas
 
 ```bash
@@ -24,7 +23,6 @@ curl members.3322.org/dyndns/getip
 yum install cifs-utils
 mount -t cifs -o username=gourds,password=xxxx,vers=1.0  //pan.share.net/Public/ /mnt/pan
 ```
-
 
 
 ### 时间同步及设置
@@ -39,7 +37,6 @@ date -s "20100405 14:31:00"
 ```
 
 
-
 ### sudo执行shell
 
 ```bash
@@ -48,7 +45,6 @@ sudo sh -c "find /opt/supervisor/log/ -type f -mtime +30 -name "*.log*" -print0 
 #删除文件过多时的问题
 sudo find /opt/supervisor/log/ -type f -mtime +30 -name "*.log*" -print0 | xargs -0 -n10 rm -f {}
 ```
-
 
 
 ### utf-8的bom问题
@@ -67,7 +63,6 @@ grep -r -i -l $'^\xEF\xBB\xBF' . | xargs sed -i 's/^\xEF\xBB\xBF//g'
 ```
 
 
-
 ### 修改系统ulimit参数
 
 ```bash
@@ -81,7 +76,6 @@ root hard nofile 500000
 * soft nofile 500000
 * hard nofile 500000
 ```
-
 
 
 ### 传输限速
@@ -110,13 +104,11 @@ find . -name "*.txt" | awk '{new=gensub(".txt","",1);system("mv "$0" "new)}'
 ```
 
 
-
 ### 查找含文本文件并替换
 
 ```bash
 find ./config/ -type f |xargs grep "ssy.bj.lcc100.com" |awk -F: '{print $1}' |xargs sed -i 's@ssy.bj.lcc100.com@ssy.shec.edu.cn@g'
 ```
-
 
 
 ### 查找文件匹配字符串注释
@@ -126,14 +118,12 @@ find /etc/cron.d/ -type f | grep redisstorage |xargs sed -i "s/^.*redisstorage-u
 ```
 
 
-
 ### 清理Cache
 
 ```
 [root@host ~]# sync
 [root@host-app2 ~]# echo 3 > /proc/sys/vm/drop_caches
 ```
-
 
 
 ### Passwd设置
@@ -152,14 +142,12 @@ ssh -L 8080:192.168.164.14:8080 root@218.77.121.90
 ```
 
 
-
 ### SSH远程执行命令
 
 ```bash
 ssh -p 22 user@host "command"  #双引号command里的变量等特殊命令字符会在本地解析，此时命令中不需要再本地解析引用的变量或特殊字符就需要在期前面加上转义符“\”
 ssh -i authkey -p 22 user@host 'command' #单引号，不解析
 ```
-
 
 
 ### rm删除特殊命令
@@ -174,7 +162,6 @@ rm "*"
 ```
 
 
-
 ### 用户附加群组
 
 ```bash
@@ -185,13 +172,11 @@ echo ec2-user ALL=(ALL) NOPASSWD: ALL  >> /etc/sudoers
 ```
 
 
-
 ### sshpass带密码登录
 
 ```bash
 /usr/local/bin/sshpass -p 'your_pass' ssh  -o StrictHostKeychecking=no  root@1.1.1.1 -p22
 ```
-
 
 
 ### 加密压缩解压缩
@@ -203,13 +188,11 @@ openssl des3 -d -k passw0rd -salt -in /path/to/file.tar.gz | tar xvf -
 ```
 
 
-
 ### 常用JMS用户权限模板
 
 ```
 ALL,!/bin/bash,!/bin/tcsh,!/bin/su,!/usr/bin/passwd,!/usr/bin/passwd root,!/bin/vim /etc/sudoers,!/usr/bin/vim /etc/sudoers,!/usr/sbin/visudo,!/usr/bin/sudo -i,!/bin/bi /etc/ssh/*,!/bin/chmod 777 /etc/*,!/bin/chmod 777 *,!/bin/chmod 777,!/bin/chmod -R 777 *,!/bin/rm /*,!/bin/rm /,!/bin/rm -rf /,!/bin/rm -rf /*,!/bin/rm /etc,!/bin/rm -r /etc,!/bin/rm -rf /etc,!/bin/rm /etc/*,!/bin/rm -r /etc/*,!/bin/rm -rf /etc/*,!/bin/rm /root,!/bin/rm -r /root,!/bin/rm -rf /root,!/bin/rm /root/*,!/bin/rm -r /root/*,!/bin/rm -rf /root/*,!/bin/rm /bin,!/bin/rm -r /bin,!/bin/rm -rf /bin,!/bin/rm /bin/*,!/bin/rm -r /bin/*,!/bin/rm -rf /bin/*
 ```
-
 
 
 ### 临时加swap
@@ -220,7 +203,6 @@ mkswap /home/swapfile
 swapon /home/swapfile #不重启生效
 /home/swapfile_10G      swap                    swap    defaults        0 0#开机挂载vi /etc/fstab
 ```
-
 
 
 ### 初始化磁盘划分
@@ -303,4 +285,39 @@ PREFIX=24    //子网掩码
 GATEWAY=10.0.1.1  //网关
 DNS1=202.106.0.20  //DNS
 LAST_CONNECT=1484704230
+```
+
+
+
+### **关闭SElinux**
+
+```bash
+getenforce
+
+#临时关闭
+setenforce 0
+#永久关闭
+sed -i "s/^SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
+```
+
+
+
+### 生成pem
+
+```bash
+#https://developers.yubico.com/PIV/Guides/Generating_keys_using_OpenSSL.html
+#https://gist.github.com/mingfang/4aba327add0807fa5e7f
+ssh-keygen -t rsa -b 4096 -m PEM
+openssl rsa -in id_rsa -outform pem > id_rsa.pem
+```
+
+
+
+### **Git Clone指定key**
+
+```bash
+ssh-agent bash -c 'ssh-add /somewhere/yourkey; git clone git@github.com:user/project.git'
+
+#m2
+GIT_SSH_COMMAND='ssh -i private_key_file -o IdentitiesOnly=yes' git clone user@host:repo.git
 ```
