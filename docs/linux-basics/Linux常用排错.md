@@ -503,6 +503,19 @@ T 根据时间/累计时间进行排序
 W 将当前设置写入~/.toprc文件中
 ```
 
+**特殊说明**
+
+```
+1. %CPU  --  CPU Usage
+    The task's share of the elapsed CPU time since the last screen update, expressed as a percentage of total CPU time.
+
+    In a true SMP environment, if a process is multi-threaded and top is not operating in Threads mode, amounts greater than 100% may be reported.  You toggle Threads mode with
+    the `H' interactive command.
+
+    Also for multi-processor environments, if Irix mode is Off, top will operate in Solaris mode where a task's cpu usage will be divided by the total number of CPUs.  You tog‐
+    gle Irix/Solaris modes with the `I' interactive command.
+```
+
 ---
 
 #### strace
@@ -704,6 +717,7 @@ netstat -nat |awk '{print $6}'|sort|uniq -c
 -e 显示扩展信息，例如uid等
 -s 按各个协议进行统计
 -c 每隔一个固定时间，执行该netstat命令。
+-o timers
 ```
 
 ---
